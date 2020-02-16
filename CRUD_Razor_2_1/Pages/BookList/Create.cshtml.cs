@@ -12,6 +12,9 @@ namespace CRUD_Razor_2_1
     {
         private readonly ApplicationDbContext _db;
 
+        [TempData]
+        public string Message { get; set; }
+
         public CreateModel(ApplicationDbContext db)
         {
             _db = db;
@@ -34,6 +37,7 @@ namespace CRUD_Razor_2_1
 
             _db.Books.Add(Book);
             await _db.SaveChangesAsync();
+            Message = "Book has been created sucessfully!";
             return RedirectToPage("Index");
         }
     }
