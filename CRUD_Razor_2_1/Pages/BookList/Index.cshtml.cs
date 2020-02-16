@@ -27,5 +27,15 @@ namespace CRUD_Razor_2_1
         {
             Books = await _db.Books.ToListAsync();
         }
+
+        public async Task<IActionResult> OnPostDelete(int id)
+        {
+            var book = await _db.Books.FindAsync(id);
+            _db.Books.Remove(book);
+            await _db.SaveChangesAsync();
+
+            Message = "Book deleted successfully.";
+            return RedirectToPage("Index");
+        }
     }
 }
